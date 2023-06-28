@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float gravity;
+    public float gravity;
     public float maxSpeed; 
     private Rigidbody2D rb;
     private Vector2 startPos;
+    //public GameObject fire;
+    //public GameObject stars;
+
+    //private ParticleSystem particles;
 
     private bool dead;
 
@@ -17,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
         startPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
+        //particles = GetComponent<ParticleSystem>();
+        //particles.Stop();
         
     }
 
@@ -33,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space)){
             rb.AddForce(Vector2.up * 1200f * gravity * Time.deltaTime);
+            
         }
     }
 }

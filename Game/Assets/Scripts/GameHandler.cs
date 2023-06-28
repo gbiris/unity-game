@@ -5,8 +5,8 @@ public class GameHandler : MonoBehaviour
 {
     private PlayerMovement player;
     private Spawner spawner;
-
-    private Rigidbody2D Rigid;
+    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
 
     /* public Text scoreText;
     public GameObject playButton;
@@ -16,9 +16,8 @@ public class GameHandler : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-
         player = FindObjectOfType<PlayerMovement>();
-
+        rb = player.GetComponent<Rigidbody2D>();
         Pause();
     }
 
@@ -34,6 +33,7 @@ public class GameHandler : MonoBehaviour
     {
         /* score = 0;
         scoreText.text = score.ToString(); */
+        //player.gravity = 3;
         Time.timeScale = 1f;
         player.enabled = true;
 
@@ -52,6 +52,8 @@ public class GameHandler : MonoBehaviour
 
     public void Pause()
     {
+        //player.gravity = 0;
+        
         Time.timeScale = 0f;
         player.enabled = false;
        /*  GameObject[] Player = FindObjectOfType
