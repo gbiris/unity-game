@@ -19,10 +19,11 @@ public class PlayerMovement : MonoBehaviour
     //private ParticleSystem particles;
 
     private bool dead;
-
- 
+    public static PlayerMovement Instance { get; set; }
+    
     private void OnEnable() 
     {
+        Instance = this;
         startPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
@@ -54,4 +55,9 @@ public class PlayerMovement : MonoBehaviour
             flamesEmission.enabled = false;
         }
     }
+    
+    public Vector2 GetVel()
+	{
+		return rb.velocity;
+	}
 }

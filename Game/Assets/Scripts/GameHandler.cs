@@ -6,9 +6,6 @@ public class GameHandler : MonoBehaviour
     private PlayerMovement player;
     private Spawner spawner;
     private Rigidbody2D rb;
-    //private Rigidbody2D rb;
-
-    
     public GameObject playText;
     /* public Text scoreText;
     public GameObject gameOver;
