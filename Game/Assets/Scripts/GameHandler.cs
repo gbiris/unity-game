@@ -8,8 +8,9 @@ public class GameHandler : MonoBehaviour
     private Rigidbody2D rb;
     //private Rigidbody2D rb;
 
+    
+    public GameObject playText;
     /* public Text scoreText;
-    public GameObject playButton;
     public GameObject gameOver;
     public int score { get; private set; } */
 
@@ -23,10 +24,15 @@ public class GameHandler : MonoBehaviour
 
     void Update()
     {
-        if ((Input.anyKey) && (Time.timeScale == 0f))
+        if ((Input.GetKey(KeyCode.Space)) && (Time.timeScale == 0f))
         {
             Play();
             Debug.Log("Play");
+        }
+
+        if ((Input.GetKey(KeyCode.Escape)) && (Time.timeScale == 1f))
+        {
+            Pause();
         }
     }
 
@@ -39,7 +45,7 @@ public class GameHandler : MonoBehaviour
         player.enabled = true;
 
     
-        //playButton.SetActive(false);
+        playText.SetActive(false);
         //gameOver.SetActive(false);
     }
 
@@ -52,14 +58,9 @@ public class GameHandler : MonoBehaviour
     // }
 
     public void Pause()
-    {
-        //player.gravity = 0;
-        
+    {   
         Time.timeScale = 0f;
         player.enabled = false;
-       /*  GameObject[] Player = FindObjectOfType
-        Rigid = Player[0].GetComponent<Rigidbody2D>();
-        Rigid.gravityScale = 0; */
     }
 
 /*     public void IncreaseScore()
