@@ -23,7 +23,7 @@ public class GameHandler : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKey(KeyCode.Space)) && (Time.timeScale == 0f))
+        if ((Input.anyKey) && (Time.timeScale == 0f))
         {
             Play();
             Debug.Log("Play");

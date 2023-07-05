@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         //    rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);  
         //}
 
-        if (Input.GetKey(KeyCode.Space)){
+        if (Input.anyKey){
             rb.AddForce(Vector2.up * 1200f * gravity * Time.deltaTime);
             
         }
