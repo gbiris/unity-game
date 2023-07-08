@@ -22,5 +22,4 @@ public class Spawner : MonoBehaviour
         GameObject obstacles = Instantiate(prefab, transform.position, Quaternion.identity);
         obstacles.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
     }
-
 }

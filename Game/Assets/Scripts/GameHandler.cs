@@ -1,26 +1,36 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
     private PlayerMovement player;
     private Spawner spawner;
     private Rigidbody2D rb;
+
     public GameObject playText;
-    /* public Text scoreText;
+    public TMP_Text scoreText;
     public GameObject gameOver;
-    public int score { get; private set; } */
+
+
+    public int score { get; private set; }
 
     private void Awake()
     {
         Application.targetFrameRate = 60;
+
         player = FindObjectOfType<PlayerMovement>();
-        rb = player.GetComponent<Rigidbody2D>();
+        spawner = FindObjectOfType<Spawner>();
+
+        scoreText.enabled = false;
+        gameOver.SetActive(false);
         Pause();
     }
 
     void Update()
     {
+
+
         if ((Input.GetKey(KeyCode.Space)) && (Time.timeScale == 0f))
         {
             Play();
@@ -35,24 +45,29 @@ public class GameHandler : MonoBehaviour
 
     public void Play()
     {
-        /* score = 0;
-        scoreText.text = score.ToString(); */
+        score = 0;
         //player.gravity = 3;
         Time.timeScale = 1f;
         player.enabled = true;
 
-    
+        scoreText.enabled = true;
         playText.SetActive(false);
-        //gameOver.SetActive(false);
+        gameOver.SetActive(false);
+
+        Obstacles[] obstacles = FindObjectsOfType<Obstacles>();
+
+        for (int i = 0; i < obstacles.Length; i++) {
+            Destroy(obstacles[i].gameObject);
+        }
     }
 
-    // public void GameOver()
-    // {
-    //     //playButton.SetActive(true);
-    //     //gameOver.SetActive(true);
+    public void GameOver()
+    {
+        //playButton.SetActive(true);
+        gameOver.SetActive(true);
 
-    //     Pause();
-    // }
+        Pause();
+    }
 
     public void Pause()
     {   
@@ -60,10 +75,11 @@ public class GameHandler : MonoBehaviour
         player.enabled = false;
     }
 
-/*     public void IncreaseScore()
+    public void IncreaseScore()
     {
         score++;
-        scoreText.text = score.ToString();
-    } */
+        //scoreText = score.SetText;
+        scoreText.SetText(score.ToString());
+    }
 
 }

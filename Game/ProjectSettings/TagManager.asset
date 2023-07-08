@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Scoring
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Post Processing
   - 
   - 
   - 
@@ -40,6 +42,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2784385713
+    locked: 0
+  - name: Effects
+    uniqueID: 2745489605
+    locked: 0
+  - name: World
+    uniqueID: 3236653815
     locked: 0
   - name: Player
     uniqueID: 219598855

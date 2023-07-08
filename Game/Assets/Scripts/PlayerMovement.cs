@@ -50,4 +50,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		return rb.velocity;
 	}
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Obstacle")) {
+            FindObjectOfType<GameHandler>().GameOver();
+        } else if (other.gameObject.CompareTag("Scoring")) {
+            FindObjectOfType<GameHandler>().IncreaseScore();
+        }
+    }
 }
