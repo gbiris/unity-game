@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 607191991}
   - component: {fileID: 607191990}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5347,10 +5347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91cd5e637d5445d382526d15d5f8f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
+  smoke: {fileID: 607191991}
   flames: {fileID: 1555555167}
-  gravity: 0
-  maxSpeed: 100
+  dead: 0
 --- !u!50 &800800222
 Rigidbody2D:
   serializedVersion: 4
@@ -5364,8 +5363,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.01
-  m_AngularDrag: 0
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -5415,7 +5414,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 34a6cb22d189c4f0eaac66a667d62b4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.13, y: 0.2}
@@ -5432,9 +5431,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800800219}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 607191989}
   - {fileID: 1555555165}
@@ -5503,7 +5502,7 @@ GameObject:
   - component: {fileID: 913677491}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5720,7 +5719,7 @@ GameObject:
   - component: {fileID: 1405502749}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5898,7 +5897,7 @@ GameObject:
   - component: {fileID: 1555555167}
   - component: {fileID: 1555555166}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: Flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

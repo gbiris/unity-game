@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     private Camera cam;
     private float defaultZoom;
     private Vector2 offset;
+    
     public static CameraMovement Instance { get; private set; }
 
     private void Awake()

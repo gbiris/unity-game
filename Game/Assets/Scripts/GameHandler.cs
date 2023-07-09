@@ -12,15 +12,17 @@ public class GameHandler : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject gameOver;
 
-
     public int score { get; private set; }
+    public static GameHandler Instance { get; set; }
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
+        Instance = this;
 
-        player = FindObjectOfType<PlayerMovement>();
-        spawner = FindObjectOfType<Spawner>();
+        Application.targetFrameRate = 120;
+
+        player = PlayerMovement.Instance;
+        spawner = Spawner.Instance;
 
         scoreText.enabled = false;
         gameOver.SetActive(false);
@@ -29,8 +31,6 @@ public class GameHandler : MonoBehaviour
 
     void Update()
     {
-
-
         if ((Input.GetKey(KeyCode.Space)) && (Time.timeScale == 0f))
         {
             Play();
@@ -46,7 +46,6 @@ public class GameHandler : MonoBehaviour
     public void Play()
     {
         score = 0;
-        //player.gravity = 3;
         Time.timeScale = 1f;
         player.enabled = true;
 
@@ -54,6 +53,8 @@ public class GameHandler : MonoBehaviour
         playText.SetActive(false);
         gameOver.SetActive(false);
 
+        // Figure out why I can't use Instace for this
+        // Maybe because variable/file names too similiar?
         Obstacles[] obstacles = FindObjectsOfType<Obstacles>();
 
         for (int i = 0; i < obstacles.Length; i++) {
@@ -65,9 +66,20 @@ public class GameHandler : MonoBehaviour
     {
         //playButton.SetActive(true);
         gameOver.SetActive(true);
-
-        Pause();
     }
+
+// public void RestartGame()
+// 	{
+// 		PlayerMovement.Instance.Restart();
+// 		NewMap();
+// 		points = 0;
+// 		Time.timeScale = 1f;
+// 		score.text = "0";
+// 		r = 0f;
+// 		r2 = 0f;
+// 		watchAdBtn.SetActive(value: true);
+// 		CameraMovement.Instance.SetStart();
+// 	}
 
     public void Pause()
     {   
@@ -77,8 +89,11 @@ public class GameHandler : MonoBehaviour
 
     public void IncreaseScore()
     {
+        if (PlayerMovement.Instance.dead)
+		{
+			return;
+		}
         score++;
-        //scoreText = score.SetText;
         scoreText.SetText(score.ToString());
     }
 

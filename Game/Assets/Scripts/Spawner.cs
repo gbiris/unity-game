@@ -7,8 +7,11 @@ public class Spawner : MonoBehaviour
     public float minHeight = -1f;
     public float maxHeight = 2f;
 
+    public static Spawner Instance { get; set; }
+
     private void OnEnable()
     {
+        Instance = this;
         InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
     }
 
