@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     
     public bool dead;
 
+    //TESTING
+    //public GameHandler menuManager;
+
     public static PlayerMovement Instance { get; set; }
 
     private void Awake() 
@@ -80,8 +83,8 @@ public class PlayerMovement : MonoBehaviour
         rb.AddTorque(400f);
         smokeEmission.enabled = false;
         flamesEmission.enabled = false;
+        MenuSwitch.Instance.DeadUI();
         // AudioManager.Instance.Play("Dead");
-        // deadUI.SetActive(value: true);
         // AudioManager.Instance.StopLoop("Fuel");
         // UIManager.Instance.UpdateDeadScreen(Game.Instance.GetScore());
         // Difficulty.Instance.ResetCamera();
@@ -93,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle")) {
             Dead();
         } else if (other.gameObject.CompareTag("Scoring")) {
-            GameHandler.Instance.IncreaseScore();
+            UIManager.Instance.IncreaseScore();
         }
     }
 

@@ -8,12 +8,8 @@ public class GameHandler : MonoBehaviour
     private Spawner spawner;
     private Rigidbody2D rb;
 
-    public GameObject playText;
-    public TMP_Text scoreText;
-    public GameObject gameOver;
-
-    public int score { get; private set; }
     public static GameHandler Instance { get; set; }
+
 
     private void Awake()
     {
@@ -23,9 +19,8 @@ public class GameHandler : MonoBehaviour
 
         player = PlayerMovement.Instance;
         spawner = Spawner.Instance;
-
-        scoreText.enabled = false;
-        gameOver.SetActive(false);
+        
+        MenuSwitch.Instance.MainUI();
         Pause();
     }
 
@@ -49,9 +44,7 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = 1f;
         player.enabled = true;
 
-        scoreText.enabled = true;
-        playText.SetActive(false);
-        gameOver.SetActive(false);
+        MenuSwitch.Instance.PlayUI();
 
         // Figure out why I can't use Instace for this
         // Maybe because variable/file names too similiar?
@@ -60,12 +53,6 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < obstacles.Length; i++) {
             Destroy(obstacles[i].gameObject);
         }
-    }
-
-    public void GameOver()
-    {
-        //playButton.SetActive(true);
-        gameOver.SetActive(true);
     }
 
 // public void RestartGame()
