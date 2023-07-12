@@ -6,72 +6,57 @@ public class GameHandler : MonoBehaviour
 {
     private PlayerMovement player;
     private Spawner spawner;
-    private Rigidbody2D rb;
+    public bool inactive;
+    public bool ingame;
+    public TMP_Text scoreText;
+    public int score { get; private set; }
 
-    public static GameHandler Instance { get; set; }
-
+     public static GameHandler Instance { get; set; }
 
     private void Awake()
     {
         Instance = this;
-
-        Application.targetFrameRate = 120;
-
         player = PlayerMovement.Instance;
         spawner = Spawner.Instance;
-        
-        MenuSwitch.Instance.MainUI();
-        Pause();
+
+        spawner.enabled = false;
+        inactive = true;
+        ingame = false;
+        PlayerMovement.Instance.setGravity();
     }
 
-    void Update()
+    public void InGame()
     {
-        if ((Input.GetKey(KeyCode.Space)) && (Time.timeScale == 0f))
-        {
-            Play();
-            Debug.Log("Play");
-        }
-
-        if ((Input.GetKey(KeyCode.Escape)) && (Time.timeScale == 1f))
-        {
-            Pause();
-        }
+        ingame = true;
     }
 
-    public void Play()
+    public void StartGame()
     {
-        score = 0;
-        Time.timeScale = 1f;
         player.enabled = true;
+        spawner.enabled = true;
+        inactive = false;
+        PlayerMovement.Instance.setGravity();
+    }
 
-        MenuSwitch.Instance.PlayUI();
+    public void RestartGame()
+	{
+        ingame = true;
+        inactive = true;
 
-        // Figure out why I can't use Instace for this
-        // Maybe because variable/file names too similiar?
+        ResetScore();
+
+        PlayerMovement.Instance.setGravity();
+		PlayerMovement.Instance.ResetPlayer();
+        PlayerMovement.Instance.dead = false;
+
         Obstacles[] obstacles = FindObjectsOfType<Obstacles>();
 
-        for (int i = 0; i < obstacles.Length; i++) {
+        for (int i = 0; i < obstacles.Length; i++) 
+        {
             Destroy(obstacles[i].gameObject);
         }
-    }
 
-// public void RestartGame()
-// 	{
-// 		PlayerMovement.Instance.Restart();
-// 		NewMap();
-// 		points = 0;
-// 		Time.timeScale = 1f;
-// 		score.text = "0";
-// 		r = 0f;
-// 		r2 = 0f;
-// 		watchAdBtn.SetActive(value: true);
-// 		CameraMovement.Instance.SetStart();
-// 	}
-
-    public void Pause()
-    {   
-        Time.timeScale = 0f;
-        player.enabled = false;
+        spawner.enabled = false;
     }
 
     public void IncreaseScore()
@@ -84,4 +69,9 @@ public class GameHandler : MonoBehaviour
         scoreText.SetText(score.ToString());
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+        scoreText.SetText(score.ToString());
+    }
 }

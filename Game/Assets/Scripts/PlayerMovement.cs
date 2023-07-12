@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //private ParticleSystem.EmissionModule emission;
-
     private ParticleSystem.EmissionModule flamesEmission;
     private ParticleSystem.EmissionModule smokeEmission;
 
     public ParticleSystem smoke;
     public ParticleSystem flames;
 
-    private float gravity;
+    public float gravity;
     private Rigidbody2D rb;
 
     private Vector2 startPos;
@@ -20,12 +18,9 @@ public class PlayerMovement : MonoBehaviour
     
     public bool dead;
 
-    //TESTING
-    //public GameHandler menuManager;
-
     public static PlayerMovement Instance { get; set; }
 
-    private void Awake() 
+    private void Awake()
     {
         Instance = this;
         startPos = base.transform.position;
@@ -33,11 +28,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         gravity = rb.gravityScale;
         flamesEmission = flames.emission;
-        smokeEmission = smoke.emission;   
+        smokeEmission = smoke.emission;  
     }
 
     void Update()
     {
+        gravity = rb.gravityScale;
         if (Input.GetKey(KeyCode.Space))
         {
             flamesEmission.enabled = true;
@@ -79,32 +75,34 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Dead");
         dead = true;
+        GameHandler.Instance.ingame = false;
         rb.AddForce(Vector2.right * 1000f);
         rb.AddTorque(400f);
         smokeEmission.enabled = false;
         flamesEmission.enabled = false;
-        MenuSwitch.Instance.DeadUI();
-        // AudioManager.Instance.Play("Dead");
-        // AudioManager.Instance.StopLoop("Fuel");
-        // UIManager.Instance.UpdateDeadScreen(Game.Instance.GetScore());
-        // Difficulty.Instance.ResetCamera();
-        // Object.Instantiate(explosion, base.transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Obstacle")) {
+        if (other.gameObject.CompareTag("Obstacle") && !(GameHandler.Instance.inactive)) {
             Dead();
         } else if (other.gameObject.CompareTag("Scoring")) {
-            UIManager.Instance.IncreaseScore();
+            GameHandler.Instance.IncreaseScore();
         }
     }
 
     public void Restart()
 	{
 		ResetPlayer();
+        gravity = 0;
 		rb.gravityScale = gravity;
 		dead = false;
+        Obstacles[] obstacles = FindObjectsOfType<Obstacles>();
+
+        for (int i = 0; i < obstacles.Length; i++) 
+        {
+            Destroy(obstacles[i].gameObject);
+        }
 		//deadUI.SetActive(value: false);
 		//SelectChar();
 		//Difficulty.Instance.NewGame();
@@ -119,4 +117,18 @@ public class PlayerMovement : MonoBehaviour
 		flamesEmission.enabled = true;
 		// CameraMovement.Instance.Restart();
     }
+
+    public void setGravity()
+    {
+        if(GameHandler.Instance.inactive)
+        {
+            rb.gravityScale = 0;
+        }
+
+        if(!(GameHandler.Instance.inactive))
+        {
+            rb.gravityScale = 3;
+        }
+    }
 }
+

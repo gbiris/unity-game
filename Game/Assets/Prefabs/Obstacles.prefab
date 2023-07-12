@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5238471624364677189}
   - component: {fileID: 1185703304141075963}
   - component: {fileID: 2408782881607568117}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bottom
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1058313481
-  m_SortingLayer: 3
+  m_SortingLayerID: 1142761499
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5238471624886313633}
   - component: {fileID: 3268927720020424749}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 5238471625342227910}
   - component: {fileID: 8655284023879171094}
   - component: {fileID: 8591915235842759620}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Top
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -257,8 +257,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1058313481
-  m_SortingLayer: 3
+  m_SortingLayerID: 1142761499
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -330,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4380049846623360354}
   - component: {fileID: 408253815365392493}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Score
   m_TagString: Scoring
   m_Icon: {fileID: 0}
